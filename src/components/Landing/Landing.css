@@ -1,0 +1,37 @@
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: row;
+    margin: 30px 0 30px 0;
+}
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 316px;
+    width: 20%;
+    max-width: 280px;
+    padding: 20px;
+    margin: 20px 10px 20px 10px;
+    border: solid 2px black;
+}
+
+.product-title {
+    font-size: medium;
+
+}
+
+.product-category {
+    font-size: small;
+}
+
+.product-price {
+
+}
+
+.product-image {
+    height: 100px;
+    width: auto;
+}
