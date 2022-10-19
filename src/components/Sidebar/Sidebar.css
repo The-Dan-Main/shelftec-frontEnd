@@ -1,0 +1,12 @@
+.sidebar-container {
+    /* width: 250px; */
+    /* flex-grow: 2; */
+    /* margin-right: 52px; */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* justify-content: center; */
+    align-items: stretch;
+    align-content: stretch;
+}
