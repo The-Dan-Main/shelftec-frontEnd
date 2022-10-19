@@ -2,6 +2,9 @@ import './Landing.css'
 
 export default function Landing(props) {
     // console.log("isloading:",props.isloading)
+    // props.products.forEach(e => {
+    //     console.log(e.category)
+    //   })
 
 
     return (

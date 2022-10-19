@@ -7,12 +7,14 @@ import Compare from '../Compare/Compare'
 
 import './Content.css'
 import { Route, Routes } from 'react-router-dom';
+import Sidebar from '../Sidebar/Sidebar'
 
 export default function Content(props) {
     // console.log(props.isLoading)
 
     return (
         <div className='content-container'>
+            <Sidebar />
             
                 <Routes>
 

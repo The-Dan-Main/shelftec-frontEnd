@@ -15,7 +15,7 @@ function App() {
 
     if (searchInput === "") {
       setIsLoading(true)
-      fetch('https://fakestoreapi.com/products')
+      fetch('https://shelf-tec-store.herokuapp.com/products')
         .then(res => res.json())
         .then(res => {
           setProducts(res)
@@ -26,8 +26,6 @@ function App() {
       console.log("specific search for:", searchInput)
     }
   }
-
-
 
 
 
