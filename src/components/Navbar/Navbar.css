@@ -49,6 +49,7 @@
     height: 30px;
     border: none;
     padding: 0;
+    cursor: pointer;
 }
 
 .navbar-search-input {
@@ -71,7 +72,7 @@
 
 
 .navbar-menu-links {
-    width: 250px;
+    width: 20%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -89,4 +90,23 @@
     width: auto;
     padding: 7px;
 
+}
+
+.signIn-Container{
+    display: flex;
+    padding: 5px;
+    background-color: #3f5b97;
+    color: white;
+    height: 4vh;
+    width: 5vw;
+    border-radius: 15px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.signIn-Container h1 {
+    font-size: 20px;
+    margin: 0;
+    width: max-content;
 }

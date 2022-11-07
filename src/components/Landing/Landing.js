@@ -1,12 +1,12 @@
+import { useEffect } from 'react'
 import './Landing.css'
-
 export default function Landing(props) {
-    // console.log("isloading:",props.isloading)
-    // props.products.forEach(e => {
-    //     console.log(e.category)
-    //   })
 
-
+    
+    useEffect(()=>{
+        props.setSidebar(true)
+        props.searchForProducts("")
+    },[])// eslint-disable-line react-hooks/exhaustive-deps
     return (
         <div className='products-container'>
 
