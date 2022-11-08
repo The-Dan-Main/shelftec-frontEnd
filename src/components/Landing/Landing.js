@@ -1,12 +1,14 @@
+import { useContext } from 'react'
 import { useEffect } from 'react'
+import { CompareContext } from '../../contexts/CompareContext'
 import './Landing.css'
 export default function Landing(props) {
-
+const { addProductToCompare } = useContext(CompareContext )
     
     useEffect(()=>{
         props.setSidebar(true)
-        props.searchForProducts("")
     },[])// eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <div className='products-container'>
 
@@ -22,8 +24,12 @@ export default function Landing(props) {
                         <p className='product-price' >${item.price}</p>
                         <h1 className='product-title'> {item.title} </h1>
                         <div className="product-rating-container">
-                            <p className="product-rating-text">{item.rating.rate}/5 Stars</p>
+                            <p className="product-rating-text">{item.rating}/5 Stars</p>
                         </div>
+                        <div className="product-functions-container">
+                            <p className="product-functions-items" onClick={()=> addProductToCompare(item)}>Compare</p>
+                            <p className="product-functions-items">Add to Cart</p>
+                        </div> 
                     </div>
                 )
             })}

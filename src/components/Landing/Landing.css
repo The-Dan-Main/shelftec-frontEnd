@@ -17,6 +17,14 @@
     margin: 20px 10px 20px 10px;
     border: solid 2px #00000008;
     border-radius: 30px;
+    justify-content: space-between;
+}
+
+.product-image-container {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-title {
@@ -33,6 +41,18 @@
 } */
 
 .product-image {
-    height: 100px;
-    width: auto;
+    height: auto;
+    width: 50%;
+}
+
+
+.product-functions-container {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.product-functions-items {
+    font-weight: bold;
+    cursor: pointer;
 }

@@ -68,7 +68,7 @@ export default function SignIn(props) {
             </div>
             {
                 alreadyExists &&
-                <div className="alreadyExists container">
+                <div className="alreadyExists-container">
                     <p>User with email '{email}' already exists!</p>
                 </div>
             }

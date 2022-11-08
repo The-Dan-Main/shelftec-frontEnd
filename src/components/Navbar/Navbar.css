@@ -9,8 +9,8 @@
     height: 100px;
     width: auto;
     padding: 5px 20px 5px 20px;
+    
 }
-
 
 
 
@@ -42,6 +42,7 @@
 }
 .navbar-logo-container {
     width: 250px;
+    cursor: pointer;
 }
 .navbar-search-img {
     z-index: 2;

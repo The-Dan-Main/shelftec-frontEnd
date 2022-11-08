@@ -15,11 +15,12 @@ export default function Content(props) {
 
     return (
         <div className='content-container'>
-            <Sidebar isVisible={props.sidebar}/>
-            
+            {props.sidebar && <Sidebar filterProductsByCategory={props.filterProductsByCategory} />}
+            <div className="content-wrapper">
+
                 <Routes>
 
-                    <Route exact path='/' element={<Landing products={props.products} isLoading={props.isLoading} setSidebar={props.setSidebar} searchForProducts={props.searchForProducts}/>} />
+                    <Route exact path='/' element={<Landing products={props.products} isLoading={props.isLoading} setSidebar={props.setSidebar} getAllProducts={props.getAllProducts}/>} />
                     <Route path='/products' element={<Products products={props.products} isLoading={props.isLoading} setSidebar={props.setSidebar}/>} />
                     <Route path='/products/:key' element={<Detailed isLoading={props.isLoading} setSidebar={props.setSidebar}/>} />
                     <Route path='/cart' element={<Cart setSidebar={props.setSidebar}/>} />
@@ -29,6 +30,7 @@ export default function Content(props) {
                     <Route path='*' element={<h1>404 - Not Found</h1>} />
 
                 </Routes>
+            </div>
 
         </div>
     )
