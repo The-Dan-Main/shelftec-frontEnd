@@ -19,7 +19,7 @@ export default function Footer(props) {
                 </a>
             </div>
             <div className="API-provider">
-                <p className="API-title">
+                {/* <p className="API-title">
                     This Website is using
                     <br />
                     the awesome API of
@@ -27,7 +27,7 @@ export default function Footer(props) {
                     <a href="https://fakestoreapi.com/" target="_blank" rel="noopener noreferrer">
                         fakeStoreApi
                     </a>
-                </p>
+                </p> */}
             </div>
         </div>
     )
