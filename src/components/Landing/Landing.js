@@ -1,9 +1,11 @@
 import { useContext } from 'react'
 import { useEffect } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import { CompareContext } from '../../contexts/CompareContext'
 import './Landing.css'
 export default function Landing(props) {
-const { addProductToCompare } = useContext(CompareContext )
+const { addProductToCompare } = useContext( CompareContext )
+const { addProductToCart } = useContext( CartContext )
     
     useEffect(()=>{
         props.setSidebar(true)
@@ -28,7 +30,7 @@ const { addProductToCompare } = useContext(CompareContext )
                         </div>
                         <div className="product-functions-container">
                             <p className="product-functions-items" onClick={()=> addProductToCompare(item)}>Compare</p>
-                            <p className="product-functions-items">Add to Cart</p>
+                            <p className="product-functions-items" onClick={()=> addProductToCart(item)}>Add to Cart</p>
                         </div> 
                     </div>
                 )

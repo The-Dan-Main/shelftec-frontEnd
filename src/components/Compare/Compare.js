@@ -7,6 +7,9 @@ export default function Compare(props) {
 
     return (
         <div className='compare-wrapper'>
+            <h1>Compare</h1>
+            <div className="compare-container">
+
             {compareProducts?.map((product) => {
                 return (
                     <div className="compare-product-container">
@@ -19,6 +22,7 @@ export default function Compare(props) {
             })}
 
 
+            </div>
         </div>
     )
 }

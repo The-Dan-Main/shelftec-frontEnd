@@ -4,6 +4,7 @@ import './App.css';
 import Content from './components/Content/Content';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
+import CartContextProvider from './contexts/CartContext';
 import CompareContextProvider from './contexts/CompareContext';
 
 function App() {
@@ -43,14 +44,16 @@ function App() {
   return (
     <div className="App">
       <CompareContextProvider>
+        <CartContextProvider>
+
         <Navbar
           filterProductsByKeyword={filterProductsByKeyword}
           loggedInProfile={loggedInProfile}
           setLoggedInProfile={setIsLoading}
           sidebar={sidebar}
           setSidebar={setSidebar}
-
-        />
+          
+          />
 
         <Content
           products={products}
@@ -61,8 +64,9 @@ function App() {
           sidebar={sidebar}
           setSidebar={setSidebar}
           filterProductsByCategory={filterProductsByCategory} 
-
-        />
+          
+          />
+          </CartContextProvider>
       </CompareContextProvider>
       <Footer />
     </div>
