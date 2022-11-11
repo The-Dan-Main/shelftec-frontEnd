@@ -1,9 +1,14 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CompareContext } from '../../contexts/CompareContext'
 import './Compare.css'
 
 export default function Compare(props) {
     const { compareProducts, removeProductToCompare } = useContext(CompareContext)
+
+    useEffect(() => {
+        props.setSidebar(false)
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
+
 
     return (
         <div className='compare-wrapper'>

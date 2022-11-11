@@ -9,7 +9,7 @@
     height: 100px;
     width: auto;
     padding: 5px 20px 5px 20px;
-    
+
 }
 
 
@@ -40,10 +40,12 @@
     align-items: center;
 
 }
+
 .navbar-logo-container {
     width: 250px;
     cursor: pointer;
 }
+
 .navbar-search-img {
     z-index: 2;
     background-color: #ffff;
@@ -93,7 +95,22 @@
 
 }
 
-.signIn-Container{
+.navbar-links-link {
+    position: relative;
+}
+
+.navbar-links-cart-count {
+    position: absolute;
+    bottom: 15px;
+    right: 0px;
+    background-color: #3f5b97;
+    color: white;
+    border-radius: 50%;
+    height: 50%;
+    width: 50%;
+}
+
+.signIn-Container {
     display: flex;
     padding: 5px;
     background-color: #3f5b97;

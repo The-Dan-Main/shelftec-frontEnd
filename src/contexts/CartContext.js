@@ -27,8 +27,9 @@ export default function CartContextProvider(props) {
                 })
         }
         else {
-            //if product already exists, increase the quantity of that product
-            changeQuantityOfCartProduct(productToAdd, 1)
+            //if product already exists, increase the quantity of that product // to get the correct quantity, find the matching cart_product and then increase the quantity
+            const increasedQuantityProduct = cartProducts.filter((item)=> item.id === productToAdd.id )[0]
+            changeQuantityOfCartProduct(increasedQuantityProduct, 1)
         }
     }
 
@@ -41,6 +42,7 @@ export default function CartContextProvider(props) {
     }
 
     const changeQuantityOfCartProduct = (productToChange, quantity) => {
+        console.log(productToChange)
         const newQuantity = productToChange.quantity += quantity
         if (newQuantity <= 0) {removeProductToCart(productToChange)} 
         else {

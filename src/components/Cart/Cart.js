@@ -11,6 +11,10 @@ export default function Cart(props) {
         fetchCartProducts()
     }, [user]);// eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        props.setSidebar(false)
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
+    
     return (
         <div>
             <h1>Cart</h1>
