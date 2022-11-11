@@ -1,5 +1,8 @@
 import * as React from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from "../../contexts/AuthContext";
+import { CartContext } from "../../contexts/CartContext";
 
 
 import './Navbar.css'
@@ -10,13 +13,14 @@ export default function Navbar(props) {
     const handleInput = (searchInput) => {
         setSearchInput(searchInput)
     }
+    let { user } = useContext(AuthContext)
+    const { cartProducts } = useContext(CartContext)
 
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
             props.filterProductsByKeyword(searchInput)
         }
     }
-
     const handleSignInClick = () => {
         navigate("/sign-In")
     }
@@ -55,7 +59,7 @@ export default function Navbar(props) {
                 </div>
                 <div className="navbar-menu-links">
                     {
-                        props.loggedInProfile?.length <= 0 &&
+                        user?.length <= 0 &&
                         <div className="signIn-Container" onClick={handleSignInClick}>
                             <h1 className="Sign-In-title">Sign In</h1>
                         </div>
@@ -77,14 +81,20 @@ export default function Navbar(props) {
                             className="navbar-links-cart"
                         />
                     </Link>
-                    <Link to="/cart">
-                        <img
-                            src={require("../../img/cart.png")}
-                            alt="Cart"
-                            title="Cart"
-                            className="navbar-links-cart"
-                        />
-                    </Link>
+                    <div className="navbar-links-link">
+                        <Link to="/cart">
+                            <img
+                                src={require("../../img/cart.png")}
+                                alt="Cart"
+                                title="Cart"
+                                className="navbar-links-cart"
+                            />
+                            {
+                                cartProducts?.length > 0 &&
+                                <p className="navbar-links-cart-count"> {cartProducts.length} </p>
+                            }
+                        </Link>
+                    </div>
                     <Link to="/support">
                         <img
                             src={require("../../img/support.png")}
