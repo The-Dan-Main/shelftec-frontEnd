@@ -1,15 +1,29 @@
-import { useContext } from 'react'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
+import axios from 'axios';
+import { AuthContext } from '../../contexts/AuthContext'
 import { CartContext } from '../../contexts/CartContext'
 import { CompareContext } from '../../contexts/CompareContext'
 import './Landing.css'
 export default function Landing(props) {
-const { addProductToCompare } = useContext( CompareContext )
-const { addProductToCart } = useContext( CartContext )
-    
-    useEffect(()=>{
+    const { addProductToCompare } = useContext(CompareContext)
+    const { addProductToCart } = useContext(CartContext)
+    const { user } = useContext(AuthContext);
+    const { setCartProducts } = useContext(CartContext)
+    const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+    useEffect(() => {
         props.setSidebar(true)
-    },[])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
+
+    //   Fetch all CartProducts, whenever the user logs in or out
+    useEffect(() => {
+        fetchCartProducts()
+    }, [user]);// eslint-disable-line react-hooks/exhaustive-deps
+
+
+    const fetchCartProducts = () => {
+        axios.get(`${BASE_URL}/cart/${user.Cart_id}/products`)
+            .then(response => setCartProducts(response.data))
+    }
 
     return (
         <div className='products-container'>
@@ -29,9 +43,9 @@ const { addProductToCart } = useContext( CartContext )
                             <p className="product-rating-text">{item.rating}/5 Stars</p>
                         </div>
                         <div className="product-functions-container">
-                            <p className="product-functions-items" onClick={()=> addProductToCompare(item)}>Compare</p>
-                            <p className="product-functions-items" onClick={()=> addProductToCart(item)}>Add to Cart</p>
-                        </div> 
+                            <p className="product-functions-items" onClick={() => addProductToCompare(item)}>Compare</p>
+                            <p className="product-functions-items" onClick={() => addProductToCart(item)}>Add to Cart</p>
+                        </div>
                     </div>
                 )
             })}

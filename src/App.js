@@ -1,24 +1,29 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import './App.css';
+import { useEffect, useState } from 'react';
 import Content from './components/Content/Content';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
+
 import CartContextProvider from './contexts/CartContext';
 import CompareContextProvider from './contexts/CompareContext';
+import AuthContextProvider from "./contexts/AuthContext.js";
+
+import './App.css';
 
 function App() {
 
-  const [allProducts, setAllProducts] = useState([])
-  const [products, setProducts] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [loggedInProfile, setLoggedInProfile] = useState([])
-  const [sidebar, setSidebar] = useState(true)
+  const [allProducts, setAllProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loggedInProfile, setLoggedInProfile] = useState([]);
+  const [sidebar, setSidebar] = useState(true);
+
 
   // Fetch all products from the API once, when page is started
   useEffect(() => {
     getAllProducts()
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
+
+
 
   const getAllProducts = () => {
     setIsLoading(true)
@@ -43,31 +48,32 @@ function App() {
 
   return (
     <div className="App">
-      <CompareContextProvider>
-        <CartContextProvider>
+      <AuthContextProvider>
+        <CompareContextProvider>
+          <CartContextProvider>
 
-        <Navbar
-          filterProductsByKeyword={filterProductsByKeyword}
-          loggedInProfile={loggedInProfile}
-          setLoggedInProfile={setIsLoading}
-          sidebar={sidebar}
-          setSidebar={setSidebar}
-          
-          />
+            <Navbar
+              filterProductsByKeyword={filterProductsByKeyword}
+              loggedInProfile={loggedInProfile}
+              setLoggedInProfile={setIsLoading}
+              sidebar={sidebar}
+              setSidebar={setSidebar}
+            />
 
-        <Content
-          products={products}
-          getAllProducts={getAllProducts}
-          isLoading={isLoading}
-          loggedInProfile={loggedInProfile}
-          setLoggedInProfile={setLoggedInProfile}
-          sidebar={sidebar}
-          setSidebar={setSidebar}
-          filterProductsByCategory={filterProductsByCategory} 
-          
-          />
+            <Content
+              products={products}
+              getAllProducts={getAllProducts}
+              isLoading={isLoading}
+              loggedInProfile={loggedInProfile}
+              setLoggedInProfile={setLoggedInProfile}
+              sidebar={sidebar}
+              setSidebar={setSidebar}
+              filterProductsByCategory={filterProductsByCategory}
+
+            />
           </CartContextProvider>
-      </CompareContextProvider>
+        </CompareContextProvider>
+      </AuthContextProvider>
       <Footer />
     </div>
   );

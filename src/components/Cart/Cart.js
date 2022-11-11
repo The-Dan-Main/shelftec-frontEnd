@@ -1,9 +1,15 @@
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import { AuthContext } from '../../contexts/AuthContext';
 import './Cart.css'
 
 export default function Cart(props) {
-const { cartProducts, removeProductToCart, changeQuantityOfCartProduct } = useContext(CartContext)
+    const { cartProducts, removeProductToCart, changeQuantityOfCartProduct, fetchCartProducts } = useContext(CartContext)
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        fetchCartProducts()
+    }, [user]);// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>

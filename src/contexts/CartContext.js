@@ -1,48 +1,54 @@
+import axios from "axios";
+import { useContext } from "react";
 import { useState, createContext } from "react";
+import { AuthContext } from "./AuthContext";
 
 
 export const CartContext = createContext();
 
+
 export default function CartContextProvider(props) {
+    const { user } = useContext(AuthContext)
     const [cartProducts, setCartProducts] = useState([])
+    const BASE_URL = `https://shelf-tec-store.herokuapp.com/cart`
+
+    const fetchCartProducts = () => {
+        axios.get(`${BASE_URL}/${user.Cart_id}/products`)
+            .then(response => setCartProducts(response.data))
+    }
+    
 
     const addProductToCart = (productToAdd) => {
         if (!cartProducts.find(item => item.id === productToAdd.id)) {
-            productToAdd.quantity = 1;
-            setCartProducts([...cartProducts, productToAdd])
-            // add DB modelling here to add product to cart in DB
+            //if product does not exist already in the cart, add it to DB
+            axios.post(`${BASE_URL}/${user.id}/products/${productToAdd.id}`)
+                .then(response => {
+                    setCartProducts(response.data)
+                })
         }
         else {
-            // add DB modelling here to increase quantity in DB
+            //if product already exists, increase the quantity of that product
             changeQuantityOfCartProduct(productToAdd, 1)
         }
     }
 
     const removeProductToCart = (productToRemove) => {
-        setCartProducts(cartProducts.filter(item => item.id !== productToRemove.id))
-        // add DB modelling here to delete product from cart in DB
+        axios.delete(`${BASE_URL}/${user.id}/products/${productToRemove.product_id}`)
+        .then(response => {
+            console.log(response)
+            setCartProducts(response.data)
+        })
     }
 
     const changeQuantityOfCartProduct = (productToChange, quantity) => {
-        const newCartProducts = []
-        cartProducts?.forEach(product => {
-            if (product.id === productToChange.id) {
-                if (product.quantity > 0 && quantity > 0) {
-                    product.quantity += quantity
-                    newCartProducts.push(product)
-                    // add DB modelling here to increase quantity in DB
-                } else if (product.quantity > 1 && quantity < 0) {
-                    product.quantity += quantity
-                    newCartProducts.push(product)
-                    // add DB modelling here to decrease quantity in DB
-                }
-            } else {
-                // means that this product is not the one, we want to change
-                newCartProducts.push(product)
-            }
-        })
-
-        setCartProducts(newCartProducts)
+        const newQuantity = productToChange.quantity += quantity
+        if (newQuantity <= 0) {removeProductToCart(productToChange)} 
+        else {
+            axios.put(`${BASE_URL}/${user.id}/products/${productToChange.product_id}/${newQuantity}`)
+            .then(response => {
+                setCartProducts(response.data)
+            })
+        }
     }
 
 
@@ -52,6 +58,7 @@ export default function CartContextProvider(props) {
             setCartProducts,
             addProductToCart,
             removeProductToCart,
+            fetchCartProducts,
             changeQuantityOfCartProduct
         }}>
             {props.children}

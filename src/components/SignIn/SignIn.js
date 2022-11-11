@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios';
 import './SignIn.css'
+import { Link } from 'react-router-dom';
 
 export default function SignIn(props) {
     const [fistName, setFirstName] = useState("")
@@ -9,6 +10,8 @@ export default function SignIn(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [alreadyExists, setAlreadyExists] = useState(false)
+
+    const BASE_URL = `https://shelf-tec-store.herokuapp.com`
 
     useEffect(() => {
 
@@ -20,7 +23,7 @@ export default function SignIn(props) {
     const handleSignUpRequest = (e) => {
         e.preventDefault();
         setAlreadyExists(false)
-        axios.get('https://shelf-tec-store.herokuapp.com/users')
+        axios.get(`${BASE_URL}/users`)
             .then(res => {
                 console.log(res.data)
                 console.log(res.data.filter(e => e.email === email))
@@ -30,7 +33,7 @@ export default function SignIn(props) {
                 }
                 else {
                     console.log("user does not exists already!")
-                    axios.post("https://shelf-tec-store.herokuapp.com/users/", {
+                    axios.post(`${BASE_URL}/auth/signup`, {
                         first_name: fistName,
                         last_name: lastName,
                         email: email,
@@ -39,13 +42,14 @@ export default function SignIn(props) {
                     .then((res) => {
                         console.log(res)
                     })
-                    .cath((err) => console.log(err))
+                    .catch((err) => console.log(err))
 
                 }
             })
     }
     return (
         <div>
+            <h1>Sign-In</h1>
 
             <label>
                 <h3 className="signIn-form-title">First Name:</h3>
@@ -66,6 +70,7 @@ export default function SignIn(props) {
             <div className="signIn-form-btns">
                 <button onClick={(e) => handleSignUpRequest(e)}>Sign me Up!</button>
             </div>
+            <Link className="login-link" to="/login">Click here to login</Link>
             {
                 alreadyExists &&
                 <div className="alreadyExists-container">
