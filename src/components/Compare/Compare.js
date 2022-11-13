@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
+
 import { CompareContext } from '../../contexts/CompareContext'
+
 import './Compare.css'
 
 export default function Compare(props) {

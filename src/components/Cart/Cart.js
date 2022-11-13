@@ -1,6 +1,8 @@
 import { useEffect, useContext } from 'react'
+
 import { CartContext } from '../../contexts/CartContext'
 import { AuthContext } from '../../contexts/AuthContext';
+
 import './Cart.css'
 
 export default function Cart(props) {
@@ -14,7 +16,7 @@ export default function Cart(props) {
     useEffect(() => {
         props.setSidebar(false)
     }, [])// eslint-disable-line react-hooks/exhaustive-deps
-    
+
     return (
         <div>
             <h1>Cart</h1>

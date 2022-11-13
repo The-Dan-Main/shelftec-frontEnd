@@ -1,15 +1,16 @@
 import { useContext, useEffect } from 'react'
-import axios from 'axios';
+
 import { AuthContext } from '../../contexts/AuthContext'
 import { CartContext } from '../../contexts/CartContext'
 import { CompareContext } from '../../contexts/CompareContext'
+
 import './Landing.css'
+
 export default function Landing(props) {
     const { addProductToCompare } = useContext(CompareContext)
-    const { addProductToCart } = useContext(CartContext)
+    const { addProductToCart, fetchCartProducts } = useContext(CartContext)
     const { user } = useContext(AuthContext);
-    const { setCartProducts } = useContext(CartContext)
-    const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+
     useEffect(() => {
         props.setSidebar(true)
     }, [])// eslint-disable-line react-hooks/exhaustive-deps
@@ -18,12 +19,6 @@ export default function Landing(props) {
     useEffect(() => {
         fetchCartProducts()
     }, [user]);// eslint-disable-line react-hooks/exhaustive-deps
-
-
-    const fetchCartProducts = () => {
-        axios.get(`${BASE_URL}/cart/${user.Cart_id}/products`)
-            .then(response => setCartProducts(response.data))
-    }
 
     return (
         <div className='products-container'>
