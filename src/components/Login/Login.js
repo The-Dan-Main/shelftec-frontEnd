@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 import axios from 'axios';
@@ -14,14 +14,6 @@ export default function Login(props) {
     const { setUser, setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
     const BASE_URL = `https://shelf-tec-store.herokuapp.com`
-    // const BASE_URL = `https:\\localhost:6000`
-
-    useEffect(() => {
-
-        props.setSidebar(false)
-
-    }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
 
     const handleLogInRequest = (e) => {
         e.preventDefault();
@@ -43,7 +35,7 @@ export default function Login(props) {
                         setAuth(true);
                         console.log(response)
                         Cookies.set("authToken", response.data.token);
-                        navigate("/products");
+                        navigate("/");
                       });
 
                 }

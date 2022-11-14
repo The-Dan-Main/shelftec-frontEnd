@@ -20,6 +20,12 @@
     justify-content: space-between;
 }
 
+.products-container-wrapper {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .product-image-container {
     height: 50%;
     display: flex;

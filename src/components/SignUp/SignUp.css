@@ -1,0 +1,4 @@
+.isEqual-false, .isEqual-false:focus-visible {
+    border: solid #ff0000 2px;
+    outline: #ff0000;
+}

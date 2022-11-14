@@ -1,20 +1,21 @@
-import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartContext } from "../../contexts/CartContext";
+import { CompareContext } from "../../contexts/CompareContext";
 
 
 import './Navbar.css'
 
 export default function Navbar(props) {
-    const [searchInput, setSearchInput] = React.useState("")
+    const [searchInput, setSearchInput] = useState("")
     const navigate = useNavigate();
     const handleInput = (searchInput) => {
         setSearchInput(searchInput)
     }
-    let { user } = useContext(AuthContext)
+    let { auth } = useContext(AuthContext)
     const { cartProducts } = useContext(CartContext)
+    const { compareProducts } = useContext(CompareContext)
 
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
@@ -22,12 +23,13 @@ export default function Navbar(props) {
         }
     }
     const handleSignInClick = () => {
-        navigate("/sign-In")
+        navigate("/login")
     }
 
     const handleLogoClick = () => {
         navigate("/")
     }
+
 
     return (
         <div className="navbar-container">
@@ -59,7 +61,7 @@ export default function Navbar(props) {
                 </div>
                 <div className="navbar-menu-links">
                     {
-                        user?.length <= 0 &&
+                        !auth &&
                         <div className="signIn-Container" onClick={handleSignInClick}>
                             <h1 className="Sign-In-title">Sign In</h1>
                         </div>
@@ -73,14 +75,20 @@ export default function Navbar(props) {
                             className="navbar-links-cart"
                         />
                     </Link>
-                    <Link to="/compare">
-                        <img
-                            src={require("../../img/compare.png")}
-                            alt="Compare"
-                            title="Compare"
-                            className="navbar-links-cart"
-                        />
-                    </Link>
+                    <div className="navbar-links-link">
+                        <Link to="/compare">
+                            <img
+                                src={require("../../img/compare.png")}
+                                alt="Compare"
+                                title="Compare"
+                                className="navbar-links-cart"
+                            />
+                            {
+                                compareProducts?.length > 0 &&
+                                <p className="navbar-links-compare-count"> {compareProducts.length} </p>
+                            }
+                        </Link>
+                    </div>
                     <div className="navbar-links-link">
                         <Link to="/cart">
                             <img
@@ -114,6 +122,6 @@ export default function Navbar(props) {
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }

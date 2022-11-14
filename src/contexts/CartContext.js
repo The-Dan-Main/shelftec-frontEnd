@@ -36,13 +36,11 @@ export default function CartContextProvider(props) {
     const removeProductToCart = (productToRemove) => {
         axios.delete(`${BASE_URL}/${user.id}/products/${productToRemove.product_id}`)
         .then(response => {
-            console.log(response)
             setCartProducts(response.data)
         })
     }
 
     const changeQuantityOfCartProduct = (productToChange, quantity) => {
-        console.log(productToChange)
         const newQuantity = productToChange.quantity += quantity
         if (newQuantity <= 0) {removeProductToCart(productToChange)} 
         else {

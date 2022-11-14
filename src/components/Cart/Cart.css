@@ -1,0 +1,33 @@
+.cart-products-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-product-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%;
+    margin: 1vh 4vw;
+    border-bottom: solid 1px #3f5b97;
+}
+
+.cart-product-container h3:not(.cart-product-quantity) {
+    border-left: solid 1px #3f5b97
+}
+
+
+
+.cart-product-title {
+    flex: 1 1 15%;
+}
+
+.cart-product-item {
+    padding: 0 1%;
+}
+.cart-summary-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 4vw;
+    border-bottom: solid 3px #3f5b97;
+}
