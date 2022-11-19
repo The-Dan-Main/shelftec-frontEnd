@@ -18,17 +18,6 @@ export default function Footer(props) {
                     <img src={require('../../img/LI-In-Bug.png')} alt="my Linked-In profile" className='footer-links-img' title='Linked-In profile' id='linked-in' />
                 </a>
             </div>
-            <div className="API-provider">
-                {/* <p className="API-title">
-                    This Website is using
-                    <br />
-                    the awesome API of
-                    <br />
-                    <a href="https://fakestoreapi.com/" target="_blank" rel="noopener noreferrer">
-                        fakeStoreApi
-                    </a>
-                </p> */}
-            </div>
         </div>
     )
 }

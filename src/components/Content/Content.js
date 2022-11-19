@@ -30,7 +30,7 @@ export default function Content(props) {
 
                     <Route element={<LoginRoutes />}>
                         <Route path='/sign-Up' element={<SignUp />} />
-                        <Route path='/Login' element={<Login />} />
+                        <Route path='/Login' element={<Login />} />      
                     </Route>
 
                     <Route element={<ProtectedRoutes />} >

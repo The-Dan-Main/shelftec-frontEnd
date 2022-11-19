@@ -38,12 +38,27 @@ export default function Cart(props) {
                                 <h3 className="cart-product-title cart-product-item">
                                     {product.title}
                                 </h3>
-                                <h3 className='cart-prodcut-price cart-product-item'>${product.price} per Item</h3>
-                                <h3 className='cart-prodcut-price cart-product-item'>Total Item Price = ${product.price * product.quantity}</h3>
+                                <h3 className='cart-product-price cart-product-item'>${product.price} per Item</h3>
+                                <h3 className='cart-product-totalPrice cart-product-item'>Total Item Price = ${product.price * product.quantity}</h3>
                                 <div className="cart-product-functions">
-                                    <button className='cart-product-function' onClick={() => removeProductToCart(product)} >delete from cart</button>
-                                    <button className='cart-product-function' onClick={() => changeQuantityOfCartProduct(product, 1)} >+</button>
-                                    <button className='cart-product-function' onClick={() => changeQuantityOfCartProduct(product, -1)} >-</button>
+                                    <button
+                                        className='cart-product-function'
+                                        onClick={() => removeProductToCart(product)}
+                                    >
+                                        delete from cart
+                                    </button>
+                                    <button
+                                        className='cart-product-function'
+                                        onClick={() => changeQuantityOfCartProduct(product, 1)}
+                                    >
+                                        +
+                                    </button>
+                                    <button
+                                        className='cart-product-function'
+                                        onClick={() => changeQuantityOfCartProduct(product, -1)}
+                                    >
+                                        -
+                                    </button>
                                 </div>
 
                             </div>
