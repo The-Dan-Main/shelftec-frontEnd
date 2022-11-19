@@ -2,6 +2,7 @@ import axios from "axios";
 import { config } from "../helpers/auth";
 import Cookies from "js-cookie";
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export const AuthContext = createContext();
@@ -11,6 +12,7 @@ export default function AuthContextProvider(props) {
   const [auth, setAuth] = useState(true);
   const [user, setUser] = useState({});
   const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     axios
@@ -26,9 +28,10 @@ export default function AuthContextProvider(props) {
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const logout = () => {
+    setUser({})
     setAuth(false);
     Cookies.remove("authToken");
-    window.location.href = '/login'
+    navigate('/login')
   }
 
   return (

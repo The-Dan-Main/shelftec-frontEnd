@@ -99,7 +99,7 @@
     position: relative;
 }
 
-.navbar-links-cart-count {
+.navbar-links-cart-count, .navbar-links-compare-count {
     position: absolute;
     bottom: 15px;
     right: 0px;

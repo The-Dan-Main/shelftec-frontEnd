@@ -1,0 +1,105 @@
+.passwordValidation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 5%;
+    border-left: 2px solid #3f5b97;
+}
+
+.validation-element-confirmation {
+    width: 30px;
+}
+
+.validation-element-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    height: 8vh;
+}
+.validation-element-container p{
+    flex-grow: 1;
+}
+
+.passwordIsValid {
+    text-align: center;
+}
+
+.signUp-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUp-form-container {
+    width: 60%;
+}
+
+.signUp-form-element {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3vw;
+    height: 9vh;
+    margin-right: 13%;
+    position: relative;
+}
+
+
+input.signUp-form-input {
+    width: 40%;
+    padding: 2px 20px;
+    height: 4vh;
+    border: 2px solid #000;
+    border-radius: 15px;
+    font-size: 1.1em;
+}
+button.signUp-form-submit-btn {
+    padding: 2%;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 20%;
+    margin-right: 12%;
+    border: 2px solid #000;
+    border-radius: 15px;
+    background-color:#3f5b97;
+    color: #fff;
+}
+
+.login-link {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.alreadyExists-message, .signUp-isNotEqual { 
+    position: absolute;
+    top: -2px;
+    font-size: 0.8em;
+    margin: 0;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+p.signUp-missingReq {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-right: 1%;
+    text-decoration-color: red;
+    font-style: italic;
+    text-decoration-thickness: 2px;
+    font-size: 1.3em;
+}
+
+
+
+
+
+
+input.signUp-form-input.isEqual-false,
+.isEqual-false,
+.isEqual-false:focus-visible {
+    border: solid #ff0000 2px;
+    outline: #ff0000;
+}

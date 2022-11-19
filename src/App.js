@@ -15,14 +15,14 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedInProfile, setLoggedInProfile] = useState([]);
-  const [sidebar, setSidebar] = useState(true);
 
 
   // Fetch all products from the API once, when page is started
   useEffect(() => {
+    setIsLoading(true)
     getAllProducts()
+    setIsLoading(false)
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
 
 
   const getAllProducts = () => {
@@ -51,13 +51,10 @@ function App() {
       <AuthContextProvider>
         <CompareContextProvider>
           <CartContextProvider>
-
             <Navbar
               filterProductsByKeyword={filterProductsByKeyword}
               loggedInProfile={loggedInProfile}
               setLoggedInProfile={setIsLoading}
-              sidebar={sidebar}
-              setSidebar={setSidebar}
             />
 
             <Content
@@ -66,10 +63,7 @@ function App() {
               isLoading={isLoading}
               loggedInProfile={loggedInProfile}
               setLoggedInProfile={setLoggedInProfile}
-              sidebar={sidebar}
-              setSidebar={setSidebar}
               filterProductsByCategory={filterProductsByCategory}
-
             />
           </CartContextProvider>
         </CompareContextProvider>

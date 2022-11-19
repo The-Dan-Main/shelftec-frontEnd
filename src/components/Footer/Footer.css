@@ -20,47 +20,28 @@
 
 .footer-links-img {
     height: 30px;
-    filter: brightness(0.7
-);
+    filter: brightness(1);
 }
 .footer-links-img:hover {
-    filter: brightness(1)
+    filter: brightness(0.5)
 }
 
 .links-container {
     display: flex;
     gap: 20px;
+    width: 100%;
     align-items: center;
+    justify-content: center;
 }
 
 #linked-in {
-    filter: grayscale(100%) brightness(2);
+    filter: grayscale(100%) brightness(2.6);
 }
 #linked-in:hover {
-    filter: grayscale(100%) brightness(3);
-}
-
-
-.API-provider {
-    display: flex;
-
-    align-items: center;
-}
-.footer-API-img {
-    height: 100px;
-}
-.API-title {
-    border-right: 1px white solid;
-    border-left: 1px white solid;
-    padding:0 10px 0 10px;
-    color: white;
-    margin: 0 20px 0 20px;
-}
-.API-title a{
-    color: white;
-    font-weight: bold;
+    filter: grayscale(100%) brightness(1);
 }
 
 .footer-logo-container {
     width: 250px;
+    position: absolute;
 }
