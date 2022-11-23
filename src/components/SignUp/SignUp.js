@@ -177,13 +177,13 @@ export default function SignUp(props) {
                                         lastName !== "" &&
                                         email !== "" &&
                                         !alreadyExists &&
+                                        isEqual &&
                                         isValidEmail &&
                                         passwordValidationLowerCase &&
                                         passwordValidationUpperCase &&
                                         passwordValidationNumber &&
                                         passwordValidationSpecialChar &&
-                                        passwordValidationLength &&
-                                        isEqual
+                                        passwordValidationLength
                                     ) &&
                                     <button className='signUp-form-submit-btn' onClick={(e) => handleSignUpRequest(e)}>Sign me Up!</button>
                                 }

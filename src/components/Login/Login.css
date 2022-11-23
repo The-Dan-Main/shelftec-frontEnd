@@ -1,3 +1,29 @@
 .loggedIn-wrapper {
-    margin: 10% 0;
+  margin: 10% 0;
 }
+
+.signIn-form-input {
+  width: 40%;
+  padding: 2px 20px;
+  height: 4vh;
+  border: 2px solid #000;
+  border-radius: 15px;
+  font-size: 1.1em;
+}
+
+.signIn-form-btns {
+  margin: 5vh 0;
+}
+.signIn-form-btns button {
+  padding: 1vh 2vw;
+  background-color: #000000;
+  font-size: large;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}/*# sourceMappingURL=Login.css.map */

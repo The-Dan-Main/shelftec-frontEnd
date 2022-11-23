@@ -13,7 +13,6 @@ export default function Login(props) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [Message, setMessage] = useState("")
 
-
     const { setUser, setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
     const BASE_URL = `https://shelf-tec-store.herokuapp.com`
@@ -94,19 +93,15 @@ export default function Login(props) {
                 </div>
             }
             {
-                !loggedIn &&
-                <div className="error-wrapper">
-                    <h1> {Message} </h1>
-                </div>
-
-            }
-
-            {
-                loggedIn &&
-                <div className="loggedIn-wrapper">
-                    <h1> {Message} </h1>
-                    <h2>Welcome Back!</h2>
-                </div>
+                !loggedIn ?
+                    <div className="error-wrapper">
+                        <h1> {Message} </h1>
+                    </div>
+                    :
+                    <div className="loggedIn-wrapper">
+                        <h1> {Message} </h1>
+                        <h2>Welcome Back!</h2>
+                    </div>
 
             }
 
