@@ -16,6 +16,7 @@ import Cart from '../Cart/Cart'
 import { AuthContext } from '../../contexts/AuthContext'
 
 import './Content.css'
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 export default function Content(props) {
 
@@ -32,7 +33,8 @@ export default function Content(props) {
 
                     <Route element={<LoginRoutes />}>
                         <Route path='/sign-Up' element={<SignUp />} />
-                        <Route path='/Login' element={<Login />} />      
+                        <Route path='/Login' element={<Login />} />
+                        <Route path='/forgottenPassword' element={<ForgotPassword />} />
                     </Route>
 
                     <Route element={<ProtectedRoutes />} >
