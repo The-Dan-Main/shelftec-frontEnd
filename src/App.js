@@ -11,10 +11,10 @@ import './App.css';
 
 function App() {
 
-  const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loggedInProfile, setLoggedInProfile] = useState([]);
+  const [allProducts, setAllProducts] = useState([]),
+    [products, setProducts] = useState([]),
+    [isLoading, setIsLoading] = useState(true),
+    [loggedInProfile, setLoggedInProfile] = useState([]);
 
 
   // Fetch all products from the API once, when page is started

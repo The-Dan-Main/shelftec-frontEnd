@@ -1,36 +1,26 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from "js-cookie";
 import axios from 'axios';
 
-import { AuthContext } from '../../contexts/AuthContext';
+import './ForgotPassword.css'
 
-import './Login.css'
-
-export default function Login(props) {
+export default function ForgotPassword(props) {
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [loggedIn, setLoggedIn] = useState(false)
     const [Message, setMessage] = useState("")
-
-    const { setUser, setAuth } = useContext(AuthContext);
+    const [isSubmitted, setSubmitted] = useState(false)
     const navigate = useNavigate();
     const BASE_URL = `https://shelf-tec-store.herokuapp.com`
 
 
     const loginCall = async () => {
         try {
-            let response = await axios.post(`${BASE_URL}/auth/login`, {
-                email: email,
-                password: password
+            await axios.post(`${BASE_URL}/email/forgotPassword`, {
+                email: email
             })
-            setLoggedIn(true)
-            setUser(response.data.foundUser);
-            Cookies.set("authToken", response.data.token);
-            setMessage("Successfull Login!")
+            setMessage("Email with temporary password is sent to this email address!")
             setTimeout(() => {
-                setAuth(true);
-                navigate("/");
+                setSubmitted(true)
+                navigate("/login");
             }, 3000);
 
         } catch (error) {
@@ -46,7 +36,7 @@ export default function Login(props) {
         axios.get(`${BASE_URL}/users`)
             .then(async (res) => {
                 if (!res.data.filter(e => e.email === email).length > 0) {
-                    setMessage("user does not exists")
+                    setMessage("There is no account with this email address!")
                 }
                 else {
                     loginCall()
@@ -57,39 +47,32 @@ export default function Login(props) {
         <div className='login-container'>
 
             {
-                !loggedIn &&
+                !isSubmitted &&
                 <div className="login-wrapper">
-                    <h1>Log-In</h1>
-
+                    <h1>Forgot Password</h1>
+                    <p>After submitting your email, you will receive a temporary password, with which you can Login and change to your desired new password.</p>
                     <label>
                         <h3 className="signIn-form-title">Email:</h3>
                         <input
                             required type="email"
                             className='signIn-form-input'
                             title="email"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {
+                                setSubmitted(false)
+                                setEmail(e.target.value)
+                            }
+                            }
                             value={email}
                         />
                     </label>
-                    <label>
-                        <h3 className="signIn-form-title">Password:</h3>
-                        <input
-                            required
-                            type="password"
-                            className='signIn-form-input'
-                            title="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            />
-                            <br />
-                        <Link className="login-link" to="/forgottenPassword">
-                            I forgot my password!
-                        </Link>
-                    </label>
                     <div className="signIn-form-btns">
-                        <button onClick={(e) => handleLogInRequest(e)}>Log me In!</button>
+                        <button onClick={(e) => handleLogInRequest(e)}>Reset my password!</button>
                     </div>
-
+                    <Link className="login-link" to="/sign-up">
+                        Back to Login
+                    </Link>
+                    <br />
+                    <p><strong>or</strong></p>
                     <Link className="login-link" to="/sign-up">
                         Click here create an account!
                     </Link>
@@ -98,7 +81,7 @@ export default function Login(props) {
                 </div>
             }
             {
-                !loggedIn ?
+                !isSubmitted ?
                     <div className="error-wrapper">
                         <h1> {Message} </h1>
                     </div>
