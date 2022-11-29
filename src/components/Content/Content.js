@@ -1,6 +1,8 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { useContext } from 'react'
 
+import Orders from '../UserRelated/Orders/Orders';
+import ChangePassword from '../UserRelated/ChangePassword/ChangePassword';
 import Detailed from '../Detailed/Detailed'
 import Products from '../Products/Products'
 import Compare from '../Compare/Compare'
@@ -36,6 +38,8 @@ export default function Content(props) {
                     <Route element={<ProtectedRoutes />} >
                         <Route path='/cart' element={<Cart />} />
                         <Route path='/user' element={<User />} />
+                        <Route path='/user/resetPassword' element={<ChangePassword />} />
+                        <Route path='/user/orders' element={<Orders />} />
                     </Route>
                     <Route path='*' element={<h1>404 - Not Found</h1>} />
                 </Routes>

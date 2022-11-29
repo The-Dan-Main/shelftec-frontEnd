@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthContext';
 import axios from 'axios';
+import './ChangePassword.css'
 
-import './SignUp.css'
-
-export default function SignUp(props) {
+export default function ChangePassword(props) {
     const
-        [firstName, setFirstName] = useState(""),
-        [lastName, setLarstName] = useState(""),
-        [email, setEmail] = useState(""),
+        [oldPassword, setOldpassword] = useState(""),
         [password, setPassword] = useState(""),
         [passwordConfirmation, setPasswordConfirmation] = useState(""),
-        [alreadyExists, setAlreadyExists] = useState(false),
-        [isValidEmail, setisValidEmail] = useState(true),
         [isEqual, setIsEqual] = useState(true),
         [passwordValidationLowerCase, setPasswordValidationLowerCase] = useState(false),
         [passwordValidationUpperCase, setPasswordValidationUpperCase] = useState(false),
@@ -20,19 +16,14 @@ export default function SignUp(props) {
         [passwordValidationSpecialChar, setPasswordValidationSpecialChar] = useState(false),
         [passwordValidationLength, setPasswordValidationLength] = useState(false),
         [isLoggedIn, setIsLoggedIn] = useState(false),
+        [error, setError] = useState(""),
+        { user } = useContext(AuthContext),
         BASE_URL = `https://shelf-tec-store.herokuapp.com`,
         navigate = useNavigate();
 
-    const handleEmailInput = (newEmail) => {
-        setEmail(newEmail)
-        if (newEmail === "") return setisValidEmail(true)
-        //eslint-disable-next-line no-control-regex
-        const emailReq = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
-        if (newEmail.match(emailReq)) {
-            setisValidEmail(true)
-        } else {
-            setisValidEmail(false)
-        }
+    const handleOldPasswordInput = (password) => {
+        setError("")
+        setOldpassword(password)
     }
 
     const handlePasswordInput = (newPassword) => {
@@ -54,12 +45,11 @@ export default function SignUp(props) {
     }
 
     const validatePassword = async () => {
-        const
-            lowerCaseCheck = /[a-z]/,
-            upperCaseCheck = /[A-Z]/g,
-            numberCheck = /[0-9]/g,
-            specialCharCheck = /[!@#$%^&*.,_-]/g,
-            lengthCheck = password.length > 7 && password.length < 21
+        const lowerCaseCheck = /[a-z]/g
+        const upperCaseCheck = /[A-Z]/g;
+        const numberCheck = /[0-9]/g;
+        const specialCharCheck = /[!@#$%^&*.,_-]/g;
+        const lengthCheck = password.length > 7 && password.length < 21
 
         if (password.match(lowerCaseCheck)) {
             setPasswordValidationLowerCase(true)
@@ -89,79 +79,55 @@ export default function SignUp(props) {
     }
 
     useEffect(() => {
-        setAlreadyExists(false)
-    }, [email])// eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
         validatePassword()
     }, [password])// eslint-disable-line react-hooks/exhaustive-deps
 
     const handleSignUpRequest = (e) => {
         e.preventDefault();
-        setAlreadyExists(false)
-        axios.get(`${BASE_URL}/users`)
-            .then(res => {
-                console.log(res.data)
-                console.log(res.data.filter(e => e.email === email))
-                if (res.data.filter(e => e.email === email).length > 0) {
-                    console.log("user does exists already")
-                    setAlreadyExists(true)
-                }
-                else {
-                    console.log("user does not exists already!")
-                    axios.post(`${BASE_URL}/auth/signup`, {
-                        first_name: firstName,
-                        last_name: lastName,
-                        email: email,
-                        password: password
-                    }).then((res) => {
-                        setIsLoggedIn(true)
-                        setTimeout(() => {
-                            navigate("/user")
-                        }, 3000);
-                    }).catch((err) => console.log(err))
-                }
-            })
+        axios.post(`${BASE_URL}/auth/resetPassword`, {
+            firstName: user.first_name,
+            email: user.email,
+            password: oldPassword,
+            newPassword: password
+        }).then((res) => {
+            console.log(res)
+            setIsLoggedIn(true)
+            setTimeout(() => {
+                navigate("/user")
+            }, 3000);
+        }).catch((err) => {
+            setError(err.response.data.message)
+        })
     }
 
 
 
     return (
-        <div className='signUp-container'>
+        <div className='signUp-container passwordChange-container'>
             {
                 !isLoggedIn ?
                     <div className="signUp-wrapper">
                         <div className="signUp-form-container">
                             <div className="signUp-form-element">
-                                <h1 className='signUp-title'>Let's create your account</h1>
+                                <h1 className='signUp-title'>Let's change your password</h1>
                             </div>
                             <div className="signUp-form-element">
-                                <h3 className="signUp-form-title">First Name:</h3>
-                                <input required type="text" className='signUp-form-input' title="first_name" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
-                            </div>
-                            <div className="signUp-form-element">
-                                <h3 className="signUp-form-title">Last Name:</h3>
-                                <input required type="text" className='signUp-form-input' title="last_name" onChange={(e) => setLarstName(e.target.value)} value={lastName} />
-
-                            </div>
-                            <div className="signUp-form-element">
-                                <h3 className="signUp-form-title">Email:</h3>
-                                <input required type="email" className='signUp-form-input' title="email" onChange={(e) => handleEmailInput(e.target.value)} value={email} />
+                                <h3 className="signUp-form-title">Current Password:</h3>
+                                <input required type="password" className='signUp-form-input' title="current Password" onChange={(e) => handleOldPasswordInput(e.target.value)} value={oldPassword} />
                                 {
-                                    alreadyExists &&
-                                    <p className='alreadyExists-message'>User with this email already exists, please login!</p>
-                                }
-                                {
-                                    !isValidEmail &&
-                                    <p className='alreadyExists-message'>Please insert a valid email address!</p>
+                                    error.length > 0 &&
+                                    <p className='signUp-isNotEqual'> {error}</p>
                                 }
                             </div>
                             <div className="signUp-form-element">
-                                <h3 className="signUp-form-title">Password:</h3>
-                                <input required type="password" className='signUp-form-input' title="password" onChange={(e) => handlePasswordInput(e.target.value)} value={password} />
+                                <h3 className="signUp-form-title">New Password:</h3>
+                                <input required type="password" className='signUp-form-input newPassword' title="password" onChange={(e) => handlePasswordInput(e.target.value)} value={password} />
+                                {
+                                    oldPassword === password && <p className='signUp-isNotEqual'>New password needs to different from current!</p>
+                                }
                             </div>
                             <div className="signUp-form-element">
-                                <h3 className="signUp-form-title">Confirm Password:</h3>
+                                <h3 className="signUp-form-title">Confirm New Password:</h3>
                                 <input required type="password" className={`signUp-form-input isEqual-${isEqual}`} title="password" onChange={(e) => handlePasswordConfirmationInput(e.target.value)} />
                                 {
                                     !isEqual && <p className='signUp-isNotEqual'>Passwords do not match!</p>
@@ -170,27 +136,17 @@ export default function SignUp(props) {
                             <div className="signUp-form-submit signUp-form-element">
                                 {
                                     (
-                                        firstName !== "" &&
-                                        lastName !== "" &&
-                                        email !== "" &&
-                                        !alreadyExists &&
                                         isEqual &&
-                                        isValidEmail &&
                                         passwordValidationLowerCase &&
                                         passwordValidationUpperCase &&
                                         passwordValidationNumber &&
                                         passwordValidationSpecialChar &&
                                         passwordValidationLength
                                     ) &&
-                                    <button className='signUp-form-submit-btn' onClick={(e) => handleSignUpRequest(e)}>Sign me Up!</button>
+                                    <button className='signUp-form-submit-btn' onClick={(e) => handleSignUpRequest(e)}>Change Password!</button>
                                 }
                                 {
                                     (
-                                        firstName === "" ||
-                                        lastName === "" ||
-                                        email === "" ||
-                                        alreadyExists ||
-                                        !isValidEmail ||
                                         !passwordValidationLowerCase ||
                                         !passwordValidationUpperCase ||
                                         !passwordValidationNumber ||
@@ -201,55 +157,52 @@ export default function SignUp(props) {
                                     <p className='signUp-missingReq'>Looks like you did not finish everything yet!</p>
                                 }
                             </div>
-                            <div className="signUp-form-element">
-                                <Link className="login-link" to="/login">You already have an account and want to login?</Link>
-                            </div>
                         </div>
                         <div className="passwordValidation-container">
-                            <h3 className="passwordValidation-title">Password Requirements</h3>
+                            <h3 className="passwordValidation-title">New Password Requirements</h3>
                             <h5 className="passwordValidation-desc">Your password must meet all of the following criteria:</h5>
                             <div className="validation-element-container">
                                 {passwordValidationLowerCase &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/green-check.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/green-check.png')} className="validation-element-confirmation" />
                                 }
                                 {!passwordValidationLowerCase &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/red-cross-mark.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/red-cross-mark.png')} className="validation-element-confirmation" />
                                 }
                                 <p className="validation-element-title">at least one lower case letter</p>
                             </div>
                             <div className="validation-element-container">
                                 {passwordValidationUpperCase &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/green-check.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/green-check.png')} className="validation-element-confirmation" />
                                 }
                                 {!passwordValidationUpperCase &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/red-cross-mark.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/red-cross-mark.png')} className="validation-element-confirmation" />
                                 }
                                 <p className="validation-element-title">at least one upper case letter</p>
                             </div>
                             <div className="validation-element-container">
                                 {passwordValidationNumber &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/green-check.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/green-check.png')} className="validation-element-confirmation" />
                                 }
                                 {!passwordValidationNumber &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/red-cross-mark.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/red-cross-mark.png')} className="validation-element-confirmation" />
                                 }
                                 <p className="validation-element-title">at least one digit number (0-9)</p>
                             </div>
                             <div className="validation-element-container">
                                 {passwordValidationSpecialChar &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/green-check.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/green-check.png')} className="validation-element-confirmation" />
                                 }
                                 {!passwordValidationSpecialChar &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/red-cross-mark.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/red-cross-mark.png')} className="validation-element-confirmation" />
                                 }
                                 <p className="validation-element-title">at least one special character <br /> ( ! @ # $ % ^ & * . , _ - )</p>
                             </div>
                             <div className="validation-element-container">
                                 {passwordValidationLength &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/green-check.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/green-check.png')} className="validation-element-confirmation" />
                                 }
                                 {!passwordValidationLength &&
-                                    <img alt='indicator if the requirements are met' src={require('../../img/red-cross-mark.png')} className="validation-element-confirmation" />
+                                    <img alt='indicator if the requirements are met' src={require('../../../img/red-cross-mark.png')} className="validation-element-confirmation" />
                                 }
                                 <p className="validation-element-title">between 8 and 20 characters <br /> Character-count: {password.length} </p>
                             </div>
@@ -266,7 +219,7 @@ export default function SignUp(props) {
                     </div>
                     :
                     <div className="loggedIn-wrapper">
-                        <h1> You have Successfully created your Account! </h1>
+                        <h1> You have Successfully changed your Password! </h1>
                     </div>
             }
         </div>
