@@ -26,18 +26,30 @@ export default function Landing(props) {
                 {!props.isLoading && props?.products?.map(item => {
                     return (
                         <div className='product-container' key={item.id}>
-                            <h3 className='product-category'>{item.category}</h3>
                             <div className="product-image-container">
                                 <img src={item.image} alt="" className='product-image' />
                             </div>
+                            <h3 className='product-category'>{item.category}</h3>
                             <p className='product-price' >${item.price}</p>
                             <h1 className='product-title'> {item.title} </h1>
                             <div className="product-rating-container">
                                 <p className="product-rating-text">{item.rating}/5 Stars</p>
                             </div>
                             <div className="product-functions-container">
-                                <p className="product-functions-items" onClick={() => addProductToCompare(item)}>Compare</p>
-                                <p className="product-functions-items" onClick={() => addProductToCart(item)}>Add to Cart</p>
+                                <img
+                                    src={require("../../img/compare.png")}
+                                    alt="Compare"
+                                    title="Compare"
+                                    className="product-functions-items"
+                                    onClick={() => addProductToCompare(item)}
+                                />
+                                <img
+                                    src={require("../../img/cart.png")}
+                                    alt="Cart"
+                                    title="Cart"
+                                    className="product-functions-items"
+                                    onClick={() => addProductToCart(item)}
+                                />
                             </div>
                         </div>
                     )
