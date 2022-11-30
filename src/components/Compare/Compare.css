@@ -2,11 +2,14 @@
     display: flex; 
     gap: 5%;
     padding: 5%;
+    flex-direction: column;
 }
 
 .compare-product-container {
-    width: 50%;
-    border: solid;
+    min-width: 30%;
+    max-width: 45%;
+
+    /* border: solid; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,9 +24,14 @@
 .compare-product-desc {
     height: 20vh;
     text-align: center;
-    border: 2px solid;
+    /* border: 2px solid; */
 }
 
 .compare-product-price {
     font-weight: bold;
+}
+
+.compare-container {
+    display: flex;
+    gap: 5%;
 }

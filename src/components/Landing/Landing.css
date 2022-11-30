@@ -1,7 +1,6 @@
 .products-container {
     display: flex;
     flex-wrap: wrap;
-    /* gap: 20px; */
     justify-content: center;
     flex-direction: row;
     margin: 30px 0 30px 0;
@@ -10,19 +9,39 @@
 .product-container {
     display: flex;
     flex-direction: column;
-    min-height: 316px;
+    min-height: 320px;
     width: 20%;
     max-width: 280px;
     padding: 20px;
     margin: 20px 10px 20px 10px;
-    border: solid 2px #00000008;
-    border-radius: 30px;
+    align-items: flex-start;
     justify-content: space-between;
+}
+
+.product-container:hover {
+    background-color: #d4e2ff2a;
+}
+
+
+
+.products-container-wrapper .product-container:not(:first-child) {
+    /* border-right: solid 2px #00000008; */
+    border-left: solid 1px #a3b8e65e;
+}
+
+.products-container-wrapper .product-container:nth-child(3) {
+    /* border-right: solid 2px #00000008; */
+    border-left: solid 1px #a3b8e65e;
+}
+
+.products-container-wrapper .product-container:nth-child(4n+1) {
+    border: none;
 }
 
 .products-container-wrapper {
     width: 80%;
     display: flex;
+    row-gap: 1vh;
     flex-wrap: wrap;
 }
 
@@ -35,16 +54,20 @@
 
 .product-title {
     font-size: medium;
-
+    text-align: start;
+    margin: 0;
 }
 
 .product-category {
     font-size: small;
+    color: #266eac;
+    margin: 0;
+    font-weight: 500;
 }
 
-/* .product-price {
-
-} */
+p.product-rating-text {
+    margin: 0;
+}
 
 .product-image {
     height: auto;
@@ -54,11 +77,27 @@
 
 .product-functions-container {
     display: flex;
-    justify-content: center;
-    gap: 10%;
+    width: 100%;
+    justify-content: flex-end;
+    position: relative;
+    height: 3vh;
+    gap: 3%;
+    visibility: hidden;
+}
+
+.product-container:hover .product-functions-container {
+    visibility: visible;
 }
 
 .product-functions-items {
-    font-weight: bold;
+    filter: invert(15%) sepia(80%) saturate(2253%) hue-rotate(190deg) brightness(100%) contrast(100%);
     cursor: pointer;
+    height: 100%;
+    width: auto;
+}
+
+p.product-price {
+    margin: 8px 0;
+    color: #e60021;
+    font-weight: bold;
 }

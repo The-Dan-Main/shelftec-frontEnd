@@ -12,6 +12,9 @@ export default function Compare(props) {
         <div className='compare-wrapper'>
             <h1>Compare</h1>
             <div className="compare-container">
+                <div className="compare-sidebar-container">
+                    
+                </div>
 
                 {compareProducts?.map((product) => {
                     return (

@@ -17,6 +17,7 @@ export default function Login(props) {
     const navigate = useNavigate();
     const BASE_URL = `https://shelf-tec-store.herokuapp.com`
 
+    
 
     const loginCall = async () => {
         try {
@@ -53,6 +54,11 @@ export default function Login(props) {
                 }
             })
     }
+
+    const handleEnterOnInput = (key) => {
+       if (key.code === "Enter")  handleLogInRequest(key)
+    }
+
     return (
         <div className='login-container'>
 
@@ -69,6 +75,7 @@ export default function Login(props) {
                             title="email"
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
+                            onKeyUp={(e)=> handleEnterOnInput(e)}
                         />
                     </label>
                     <label>
@@ -80,6 +87,7 @@ export default function Login(props) {
                             title="password"
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
+                            onKeyUp={(e)=> handleEnterOnInput(e)}
                             />
                             <br />
                         <Link className="login-link" to="/forgottenPassword">
