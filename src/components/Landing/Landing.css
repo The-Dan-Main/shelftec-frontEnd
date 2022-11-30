@@ -9,7 +9,7 @@
 .product-container {
     display: flex;
     flex-direction: column;
-    min-height: 320px;
+    min-height: 400px;
     width: 20%;
     max-width: 280px;
     padding: 20px;
