@@ -4,7 +4,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { CartContext } from "../../contexts/CartContext";
 import { CompareContext } from "../../contexts/CompareContext";
 
-
 import './Navbar.css'
 
 export default function Navbar(props) {
@@ -20,6 +19,7 @@ export default function Navbar(props) {
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
             props.filterProductsByKeyword(searchInput)
+            navigate("/")
         }
     }
     const handleSignInClick = () => {
@@ -47,14 +47,17 @@ export default function Navbar(props) {
                     <input
                         type="text"
                         className="navbar-search-input"
-                        placeholder="search by name..."
+                        placeholder="Search for products, categories, brands and more"
                         value={searchInput}
                         onKeyUp={(e) => handleEnter(e)}
                         onChange={(e) => handleInput(e.target.value)}
                     />
                     <button
                         className="navbar-search-imgContainer"
-                        onClick={() => props.filterProductsByKeyword(searchInput)}
+                        onClick={() => {
+                            navigate("/")
+                            props.filterProductsByKeyword(searchInput)
+                        }}
                     >
                         <img src={require("../../img/search.png")} alt="Search" className="navbar-search-img" />
                     </button>

@@ -13,9 +13,10 @@
     width: 20%;
     max-width: 280px;
     padding: 20px;
-    margin: 20px 10px 20px 10px;
+    /* margin: 20px 10px 20px 10px; */
     align-items: flex-start;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .product-container:hover {
@@ -41,7 +42,7 @@
 .products-container-wrapper {
     width: 80%;
     display: flex;
-    row-gap: 1vh;
+    row-gap: 5vh;
     flex-wrap: wrap;
 }
 
@@ -63,6 +64,10 @@
     color: #266eac;
     margin: 0;
     font-weight: 500;
+}
+
+.product-category:hover {
+    color: #e60021;
 }
 
 p.product-rating-text {
@@ -96,8 +101,52 @@ p.product-rating-text {
     width: auto;
 }
 
+.product-functions-items:hover {
+    filter: invert(28%) sepia(142%) saturate(2253%) hue-rotate(-21deg) brightness(100%) contrast(100%);
+}
+
+
+
 p.product-price {
     margin: 8px 0;
     color: #e60021;
     font-weight: bold;
+}
+
+
+/* stars */
+.ratings {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #b6b6b6;
+    overflow: hidden;
+    width: 70%;
+    text-align: initial;
+}
+.full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #000;
+}
+.empty-stars:before, .full-stars:before {
+    content:"\2605\2605\2605\2605\2605";
+    font-size: 14pt;
+}
+.empty-stars:before {
+    -webkit-text-stroke: 1px #b6b6b6;;
+}
+.full-stars:before {
+    -webkit-text-stroke: 1px #000;
+}
+
+.product-rating-count {
+    position: absolute;
+    top: -10px;
+    right: 90px;
+    font-size: 14px;
+    color: black;
 }

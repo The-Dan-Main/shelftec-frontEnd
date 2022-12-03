@@ -11,7 +11,7 @@ export default function Footer(props) {
                 </Link>
             </div>
             <div className="links-container">
-                <a href="https://github.com/The-Dan-Main/therebegames" target="blank">
+                <a href="https://github.com/The-Dan-Main/shelftec-frontEnd" target="blank">
                     <img src={require('../../img/github-logo.png')} alt="this GitHub repository" className='footer-links-img' title='GitHub repository' />
                 </a>
                 <a href="https://www.linkedin.com/in/dan-weber-zurich/" target="blank">

@@ -8,13 +8,14 @@
 .compare-product-container {
     min-width: 30%;
     max-width: 45%;
-
-    /* border: solid; */
+    /* height: 80vh; */
+    min-height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     align-content: center;
+    position: relative;
 }
 
 .compare-product-title {
@@ -22,16 +23,41 @@
 }
 
 .compare-product-desc {
-    height: 20vh;
     text-align: center;
-    /* border: 2px solid; */
+    flex-grow: 1;
 }
 
 .compare-product-price {
     font-weight: bold;
 }
 
+.compare-sidebar-container {
+    position: absolute;
+}
 .compare-container {
     display: flex;
     gap: 5%;
+    justify-content: center;
+    position: relative;
+}
+
+.compare-product-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: content-box;
+    width: 15px;
+    height: 15px;
+}
+
+.compare-product-delete:hover{
+    background-color: #b2bdd450;
+    color: #c90e0e;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
 }
