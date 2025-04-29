@@ -20,7 +20,7 @@ export default function SignUp(props) {
         [passwordValidationSpecialChar, setPasswordValidationSpecialChar] = useState(false),
         [passwordValidationLength, setPasswordValidationLength] = useState(false),
         [isLoggedIn, setIsLoggedIn] = useState(false),
-        BASE_URL = `https://shelf-tec-store.herokuapp.com`,
+        BASE_URL = process.env.REACT_APP_API_URL,
         navigate = useNavigate();
 
     const handleEmailInput = (newEmail) => {

@@ -11,7 +11,7 @@ export const AuthContext = createContext();
 export default function AuthContextProvider(props) {
   const [auth, setAuth] = useState(true);
   const [user, setUser] = useState({});
-  const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+  const BASE_URL = process.env.REACT_APP_API_URL
   const navigate = useNavigate(); 
 
   useEffect(() => {

@@ -18,7 +18,7 @@ export default function ChangePassword(props) {
         [isLoggedIn, setIsLoggedIn] = useState(false),
         [error, setError] = useState(""),
         { user } = useContext(AuthContext),
-        BASE_URL = `https://shelf-tec-store.herokuapp.com`,
+        BASE_URL = process.env.REACT_APP_API_URL,
         navigate = useNavigate();
 
     const handleOldPasswordInput = (password) => {

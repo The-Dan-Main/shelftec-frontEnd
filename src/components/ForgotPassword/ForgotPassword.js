@@ -9,7 +9,7 @@ export default function ForgotPassword(props) {
     const [Message, setMessage] = useState("")
     const [isSubmitted, setSubmitted] = useState(false)
     const navigate = useNavigate();
-    const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+    const BASE_URL = process.env.REACT_APP_API_URL
 
 
     const loginCall = async () => {

@@ -10,7 +10,7 @@ export const CartContext = createContext();
 export default function CartContextProvider(props) {
     const { user } = useContext(AuthContext)
     const [cartProducts, setCartProducts] = useState([])
-    const BASE_URL = `https://shelf-tec-store.herokuapp.com/cart`
+    const BASE_URL = `${process.env.REACT_APP_API_URL}/cart`
 
     const fetchCartProducts = () => {
         axios.get(`${BASE_URL}/${user.Cart_id}/products`)

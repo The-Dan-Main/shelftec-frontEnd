@@ -15,7 +15,7 @@ export default function Login(props) {
 
     const { setUser, setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
-    const BASE_URL = `https://shelf-tec-store.herokuapp.com`
+    const BASE_URL = process.env.REACT_APP_API_URL
 
     
 

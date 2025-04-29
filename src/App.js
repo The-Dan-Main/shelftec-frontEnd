@@ -5,46 +5,48 @@ import Navbar from './components/Navbar/Navbar';
 
 import CartContextProvider from './contexts/CartContext';
 import CompareContextProvider from './contexts/CompareContext';
-import AuthContextProvider from "./contexts/AuthContext.js";
+import AuthContextProvider from './contexts/AuthContext.js';
 
 import './App.css';
 
 function App() {
-
   const [allProducts, setAllProducts] = useState([]),
     [products, setProducts] = useState([]),
     [isLoading, setIsLoading] = useState(true),
     [loggedInProfile, setLoggedInProfile] = useState([]);
 
-
   // Fetch all products from the API once, when page is started
   useEffect(() => {
-    setIsLoading(true)
-    getAllProducts()
-    setIsLoading(false)
-  }, [])// eslint-disable-line react-hooks/exhaustive-deps
-
+    setIsLoading(true);
+    getAllProducts();
+    setIsLoading(false);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getAllProducts = () => {
-    setIsLoading(true)
-    fetch('https://shelf-tec-store.herokuapp.com/products').then(res => res.json())
-      .then(res => {
-        setAllProducts(res)
-        setProducts(res)
-        setIsLoading(false)
-      })
-  }
-
+    setIsLoading(true);
+    fetch(process.env.REACT_APP_API_URL + '/products')
+      .then((res) => res.json())
+      .then((res) => {
+        setAllProducts(res);
+        setProducts(res);
+        setIsLoading(false);
+      });
+  };
 
   const filterProductsByCategory = (category) => {
-    const filteredProducts = allProducts.filter(item => item.category.includes(category))
-    setProducts(filteredProducts)
-  }
+    const filteredProducts = allProducts.filter((item) => item.category.includes(category));
+    setProducts(filteredProducts);
+  };
 
   const filterProductsByKeyword = (keyword) => {
-    const filteredProducts = allProducts.filter(item => item.category.includes(keyword) || item.description.includes(keyword) || item.title.includes(keyword))
-    setProducts(filteredProducts)
-  }
+    const filteredProducts = allProducts.filter(
+      (item) =>
+        item.category.includes(keyword) ||
+        item.description.includes(keyword) ||
+        item.title.includes(keyword)
+    );
+    setProducts(filteredProducts);
+  };
 
   return (
     <div className="App">
@@ -72,6 +74,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
